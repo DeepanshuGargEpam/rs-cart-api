@@ -1,0 +1,38 @@
+service: shop-aws-cart-service
+
+plugins:
+  # - serverless-plugin-webpack
+  - serverless-dotenv-plugin
+  - serverless-offline
+
+useDotenv: true
+provider:
+  name: aws
+  runtime: nodejs14.x
+  environment:
+    DB_HOST: ${env:DB_HOST}
+    DB_PORT: ${env:DB_PORT}
+    DB_USERNAME: ${env:DB_USERNAME}
+    DB_PASSWORD: ${env:DB_PASSWORD}
+    DB_NAME: ${env:DB_NAME}
+  stage: dev
+  region: us-east-1
+
+# custom:
+#   webpack:
+#     config: ./webpack.config.js
+#     includeModules: true
+
+# package:
+#   individually: true
+
+functions:
+  main:
+    handler: dist/main.handler
+    events:
+      - http:
+          method: ANY
+          path: /
+      - http:
+          method: ANY
+          path: '{proxy+}'
