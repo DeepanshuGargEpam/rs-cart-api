@@ -1,17 +1,22 @@
 export type Product = {
-  id: string,
-  title: string,
-  description: string,
-  price: number,
+  id: string;
+  title: string;
+  description: string;
+  price: number;
 };
 
-
 export type CartItem = {
-  product: Product,
-  count: number,
-}
+  id: string;
+  cartId?: string;
+  cart?: Cart;
+  productId?: string;
+  product?: Product;
+  count: number;
+};
 
 export type Cart = {
-  id: string,
-  items: CartItem[],
-}
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  items: CartItem[];
+};
